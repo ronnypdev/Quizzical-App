@@ -9,12 +9,32 @@ export default {
       center: true,
       padding: "2rem",
     },
+    colors: {
+      "primary": "#4D5B9E",
+      "secondary": "#293264",
+      "white": "#FFFFFF",
+      "black": "#000000",
+      "lemony": "#FFFAD1",
+      "baby-blue-medium": "#DEEBF8",
+      "baby-blue-dark": "#DBDEF0",
+      "baby-blue-light": "#F5F7FB",
+      "red-danger": "#F8BCBC",
+    },
+    fontFamily: {
+      "montserrat": ["Montserrat", "sans-serif"],
+      "karla": ["Karla", "sans-serif"],
+      "inter": ["Inter", "sans-serif"],
+    },
+    fontWeight: {
+      "normal": "400",
+      "bold": "700",
+    },
     extend: {
       height: {
-        '550px' : '32rem',
+        "550" : "34.375rem",
       },
       width: {
-        '550px' : '32rem',
+        "550" : "34.375rem",
       }
     },
   },
