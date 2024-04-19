@@ -12,6 +12,6 @@ export default function Button({buttonText}) {
 
 
 // Props Validation
-Button.PropTypes = {
+Button.propTypes = {
   buttonText: PropTypes.string
 };
