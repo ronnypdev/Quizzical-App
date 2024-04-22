@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from '../Base/Button'
+import Button from '../Base/Button';
 
 export default function StartQuiz() {
   return (
