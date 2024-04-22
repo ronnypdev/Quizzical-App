@@ -1,7 +1,82 @@
-html {
-  height: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+:root {
+  --color-white: #FFFFFF;
+  --color-black : #000000;
+  --color-primary: #293264;
+  --color-secondary: #4D5B9E;
+  --color-lemony: #FFFAD1;
+  --color-baby-blue-medium: #DEEBF8;
+  --color-baby-blue-dark: #DBDEF0;
+  --color-baby-blue-light: #F5F7FB;
+  --color-green-success: #94D7A2;
+  --color-red-failed: #F8BCBC;
+
+  --font-family-primary: "Karla", sans-serif;
+  --font-family-secondary: "Inter", sans-serif;
+
+  --font-size-normal: 16px;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
 }
 
-body {
-  overflow: hidden;
+/** Button **/
+.button {
+  background-color: var(--color-secondary);
+  border: none;
+  border-radius: 15px;
+  color: var(--color-white);
+  text-transform: capitalize;
+  max-width: 100%;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 15px 40px;
+  text-align: center;
+  cursor: pointer;
 }
+
+/** Quizzical **/
+
+.Quizzical {
+  height: 100%;
+  display: flex;
+  font-size: var(--font-size-normal);
+  justify-content: center;
+  align-items: center;
+}
+
+.Quizzical .Quizzical__container {
+  width: 550px;
+  height: 550px;
+  background-color: var(--color-baby-blue-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Quizzical .Quizzical__start {
+  text-align: center;
+}
+
+.Quizzical .Quizzical__start .Quizzical__title {
+  color: var(--color-primary);
+  font-family: var(--font-family-primary);
+  font-size: 31.25px;
+  font-style: normal;
+  font-weight: var(--font-weight-bold);
+  line-height: normal;
+  margin-bottom: 12px;
+}
+
+.Quizzical .Quizzical__start .Quizzical__description {
+  color: var(--color-primary);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-normal);
+  font-style: normal;
+  font-weight: var(--font-weight-normal);
+  line-height: normal;
+  margin-bottom: 20px;
+}
+
