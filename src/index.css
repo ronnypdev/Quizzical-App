@@ -49,7 +49,8 @@
 
 .Quizzical .Quizzical__container {
   width: 550px;
-  height: 550px;
+  height: auto;
+  max-width: 100%;
   background-color: var(--color-baby-blue-light);
   display: flex;
   justify-content: center;
@@ -80,3 +81,22 @@
   margin-bottom: 20px;
 }
 
+.Quizzical .Quizzical__Quiz {
+  align-self: flex-start;
+  padding: 15px;
+  width: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.Quizzical .Quizzical__Quiz .Quizzical__Question {
+  color: var(--color-primary);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-normal);
+  font-style: normal;
+  font-weight: var(--font-weight-bold);
+  line-height: normal;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+}
