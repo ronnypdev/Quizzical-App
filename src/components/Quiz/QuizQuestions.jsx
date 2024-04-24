@@ -7,6 +7,7 @@ export default function QuizQuestions() {
         <form className="Quizzical__Form" action="/">
           <div className="Quizzical__Form-Section">
             <p className="Quizzical__Question">How would one say goodbye in Spanish?</p>
+            <div className="Quizzical__Answers-Wrapper">
               <div className="Quizzical__Answers">
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">adios</label>
@@ -23,10 +24,12 @@ export default function QuizQuestions() {
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">Sal</label>
               </div>
+            </div>
           </div>
           {/* end Quizzical__Form-Section */}
           <div className="Quizzical__Form-Section">
             <p className="Quizzical__Question">Which best selling toy of 1983 caused hysteria, resulting in riots breaking in stores?</p>
+            <div className="Quizzical__Answers-Wrapper">
               <div className="Quizzical__Answers">
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">Cabbage Patch Kids</label>
@@ -43,10 +46,12 @@ export default function QuizQuestions() {
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">Rubik’s Cube</label>
               </div>
+            </div>
           </div>
           {/* end Quizzical__Form-Section */}
           <div className="Quizzical__Form-Section">
             <p className="Quizzical__Question">What is the hottest planet in our Solar System?</p>
+            <div className="Quizzical__Answers-Wrapper">
               <div className="Quizzical__Answers">
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">Mercury</label>
@@ -63,10 +68,12 @@ export default function QuizQuestions() {
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">Saturn</label>
               </div>
+            </div>
           </div>
           {/* end Quizzical__Form-Section */}
           <div className="Quizzical__Form-Section">
             <p className="Quizzical__Question">In which country was the caesar salad invented?</p>
+            <div className="Quizzical__Answers-Wrapper">
               <div className="Quizzical__Answers">
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">Italy</label>
@@ -83,10 +90,12 @@ export default function QuizQuestions() {
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">France</label>
               </div>
+            </div>
           </div>
           {/* end Quizzical__Form-Section */}
           <div className="Quizzical__Form-Section">
             <p className="Quizzical__Question">How Many Hearts Does An Octopus Have?</p>
+            <div className="Quizzical__Answers-Wrapper">
               <div className="Quizzical__Answers">
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">One</label>
@@ -103,6 +112,7 @@ export default function QuizQuestions() {
                 <input type="radio" name="Question_1" id="Question_1" />
                 <label htmlFor="Question_1">Four</label>
               </div>
+            </div>
           </div>
           {/* end Quizzical__Form-Section */}
           <input className="button-submit" type="submit" value="submit" />
