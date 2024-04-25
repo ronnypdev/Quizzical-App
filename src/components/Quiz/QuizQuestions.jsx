@@ -115,7 +115,9 @@ export default function QuizQuestions() {
             </div>
           </div>
           {/* end Quizzical__Form-Section */}
-          <input className="button-submit" type="submit" value="submit" />
+          <div className="Quizzical__Button-Group">
+            <input className="button button-submit" type="submit" value="check answer" />
+          </div>
         </form>
       </div>
     </>
