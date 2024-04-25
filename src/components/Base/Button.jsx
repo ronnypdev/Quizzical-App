@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 
-export default function Button({buttonText}) {
+export default function Button({buttonText, buttonCLick}) {
   return (
     <>
-      <button className="button">
+      <button onClick={buttonCLick} className="button">
         {buttonText}
       </button>
     </>

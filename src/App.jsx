@@ -6,11 +6,16 @@ import QuizQuestions from './components/Quiz/QuizQuestions';
 
 function App() {
 
+  const [isQuizStarting, setQuizStart] = useState(true);
+
+  function handleQuizStart() {
+    setQuizStart(prevQuizStart => !prevQuizStart)
+  }
+
   return (
     <>
       <Quizzical>
-        {/* <StartQuiz /> */}
-        <QuizQuestions />
+        {isQuizStarting ? <StartQuiz startQuizScreen={handleQuizStart} /> : <QuizQuestions />}
       </Quizzical>
     </>
   )
