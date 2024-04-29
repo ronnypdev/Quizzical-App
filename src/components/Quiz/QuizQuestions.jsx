@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
 export default function QuizQuestions() {
+
+  const quizUrl = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
+
   return (
     <>
       <div className="Quizzical__Quiz">
