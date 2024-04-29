@@ -150,11 +150,11 @@
 
 }
 
-.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus + label {
+/* .Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus + label {
   background-color: var(--color-baby-blue-dark);
   color: var(--color-primary);
   border-color: transparent;
-}
+} */
 
 .Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked + label {
   background-color: var(--color-baby-blue-dark);

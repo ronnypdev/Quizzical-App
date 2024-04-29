@@ -7,7 +7,7 @@ export default function StartQuiz(props) {
     <>
       <div className="Quizzical__start">
         <h1 className="Quizzical__title">Quizzical</h1>
-        <p className="Quizzical__description">Some description if needed</p>
+        <p className="Quizzical__description">Test your Anime Expertise</p>
         <Button buttonCLick={startQuizScreen} buttonText="start quiz"/>
       </div>
     </>
