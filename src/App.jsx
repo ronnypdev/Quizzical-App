@@ -16,6 +16,7 @@ function App() {
     <>
       <Quizzical>
         {isQuizStarting ? <StartQuiz startQuizScreen={handleQuizStart} /> : <QuizQuestions />}
+        {/* <QuizQuestions /> */}
       </Quizzical>
     </>
   )

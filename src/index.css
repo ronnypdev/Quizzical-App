@@ -120,50 +120,86 @@
 
 .Quizzical .Quizzical__Quiz .Quizzical__Answers {
   max-width: 100%;
-  height: 20.65px;
-  border-radius: 7.942px;
-  border: 0.794px solid var(--color-secondary);
   position: relative;
-  padding: 0 16px;
   background-color: transparent;
 }
 
-/* .Quizzical .Quizzical__Quiz .Quizzical__Answers:hover {
-  background-color: var(--color-baby-blue-dark);
-  border: none;
-} */
-
-.Quizzical .Quizzical__Quiz .Quizzical__Answers input[type="radio"] {
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio {
   opacity: 0;
   position: fixed;
   width: 0;
-  cursor: pointer;
 }
 
 .Quizzical .Quizzical__Quiz .Quizzical__Answers label {
   display: inline-block;
   border-radius: 7.942px;
+  border: 0.794px solid var(--color-secondary);
+  padding: 4px 16px;
   color: var(--color-primary);
   text-align: center;
+  text-transform: capitalize;
   font-family: var(--font-family-secondary);
   font-size: 10.24px;
   font-weight: var(--font-weight-normal);
+  cursor: pointer;
 }
 
 .Quizzical .Quizzical__Quiz .Quizzical__Answers label:hover {
   background-color: var(--color-baby-blue-dark);
+  color: var(--color-primary);
+
 }
 
-.Quizzical .Quizzical__Quiz .Quizzical__Answers input[type="radio"]:focus + label {
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus + label {
   background-color: var(--color-baby-blue-dark);
   color: var(--color-primary);
-  border-color: 0.794px solid transparent;
+  border-color: transparent;
 }
 
-.Quizzical .Quizzical__Quiz .Quizzical__Answers input[type="radio"]:checked + label { 
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked + label {
   background-color: var(--color-baby-blue-dark);
   color: var(--color-primary);
-  border-color: 0.794px solid transparent;
+  border-color: transparent;
+}
+
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus+label.correct-answer {
+  background-color: var(--color-green-success);
+  color: var(--color-primary);
+  border-color: transparent;
+}
+
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked + label.correct-answer {
+  background-color: var(--color-green-success);
+  color: var(--color-primary);
+  border-color: transparent;
+}
+
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus+label.wrong-answer {
+  background-color: var(--color-red-failed);
+  color: var(--color-primary);
+  border-color: transparent;
+  opacity: 0.5;
+}
+
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked+label.wrong-answer {
+  background-color: var(--color-red-failed);
+  color: var(--color-primary);
+  border-color: transparent;
+  opacity: 0.5;
+}
+
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus+label.disable-answer {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  opacity: 0.5;
+}
+
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked+label.disable-answer {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  opacity: 0.5;
 }
 
 .Quizzical .Quizzical__Quiz .Quizzical__Button-Group {
