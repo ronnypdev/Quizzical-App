@@ -5,7 +5,8 @@ export default function QuizQuestions() {
 
   const quizUrl = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
     
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault()
         // submitToApi(formData)
   }
 
