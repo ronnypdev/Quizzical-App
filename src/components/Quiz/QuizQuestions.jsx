@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '../Base/Button';
 
 export default function QuizQuestions() {
 
@@ -119,7 +120,7 @@ export default function QuizQuestions() {
           </div>
           {/* end Quizzical__Form-Section */}
           <div className="Quizzical__Button-Group">
-            <input className="button button-submit" type="submit" value="check answer" />
+            <Button buttonText="check answer"/>
           </div>
         </form>
       </div>
