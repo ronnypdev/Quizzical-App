@@ -4,11 +4,15 @@ import Button from '../Base/Button';
 export default function QuizQuestions() {
 
   const quizUrl = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
+    
+  function handleSubmit() {
+        // submitToApi(formData)
+  }
 
   return (
     <>
       <div className="Quizzical__Quiz">
-        <form className="Quizzical__Form" action="/">
+        <form className="Quizzical__Form" onSubmit={handleSubmit}>
           <div className="Quizzical__Form-Section">
             <p className="Quizzical__Question">How would one say goodbye in Spanish?</p>
             <div className="Quizzical__Answers-Wrapper">
