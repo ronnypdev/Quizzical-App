@@ -142,6 +142,7 @@
   font-size: 10.24px;
   font-weight: var(--font-weight-normal);
   cursor: pointer;
+  text-wrap: nowrap;
 }
 
 .Quizzical .Quizzical__Quiz .Quizzical__Answers label:hover {
