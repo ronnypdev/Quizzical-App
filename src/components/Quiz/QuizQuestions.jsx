@@ -31,8 +31,8 @@ export default function QuizQuestions() {
               <div className="Quizzical__Answers-Wrapper">
                 {quiz.incorrect_answers?.map((answers, index) =>
                   <div className="Quizzical__Answers" key={index}>
-                    <input className="input-radio" value={quiz.correct_answer} type="radio" name={quiz.difficulty} id={quiz.question}  />
-                    <label htmlFor={quiz.question}>{answers}</label>
+                    <input className="input-radio" value={decode(quiz.correct_answer)} type="radio" name={decode(quiz.correct_answer)} id={decode(answers)} />
+                    <label htmlFor={decode(answers)}>{decode(answers)}</label>
                   </div>
               )}
               </div>
