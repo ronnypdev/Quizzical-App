@@ -12,14 +12,16 @@ export default function QuizQuestions() {
     fetch(url)
       .then(response => response.json())
       .then(data => setQuizData(data))
-  },[])
+  }, [])
+  
+
+  const allAnswers = quizData.results?.incorrect_answers;
+
+  console.log("allAnswers: ", allAnswers);
 
   function handleSubmit(event) {
     event.preventDefault();
   }
-
-  // console.log("responseCode : ", quizData.response_code);
-  // console.log("results : ", quizData.results);
 
   return (
     <>
