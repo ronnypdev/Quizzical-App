@@ -6,6 +6,10 @@ export default function QuizQuestions() {
   const [quizData, setQuizData] = useState({});
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
+  // const incorrectAnswers = quizData.results?.map((result) => result.incorrect_answers?.map((answers) => console.log(answers)));
+
+  // const correctAnswers = quizData.results?.map((result) => result.correct_answer);
+  // console.log("correctAnswers: ", correctAnswers);
 
   // Fetch the data from the API
   useEffect(() => {
@@ -13,11 +17,14 @@ export default function QuizQuestions() {
       .then(response => response.json())
       .then(data => setQuizData(data))
   }, [])
-  
 
-  const allAnswers = quizData.results?.incorrect_answers;
-
-  console.log("allAnswers: ", allAnswers);
+  // Function to insert the correct_answer randomly into the incorrect answers array
+  function shuffleAllAnswers(incorrectAnswers, correctAnswers) {
+    // Generate a random index
+    let randomIndex = Math.floor(Math.random() * (incorrectAnswers.length + 1));
+    //Insert the item at the random index
+    incorrectAnswers.splice(randomIndex, 0, correctAnswers)
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -28,7 +35,7 @@ export default function QuizQuestions() {
       <div className="Quizzical__Quiz">
         <form className="Quizzical__Form" onSubmit={handleSubmit}>
           {quizData.results?.map((quiz) =>
-            <div className="Quizzical__Form-Section" key={quiz.correct_answer}>
+            <div className="Quizzical__Form-Section" key={decode(quiz.correct_answer)}>
               <p className="Quizzical__Question">{decode(quiz.question)}</p>
               <div className="Quizzical__Answers-Wrapper">
                 {quiz.incorrect_answers?.map((answers, index) =>
