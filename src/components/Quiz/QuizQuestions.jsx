@@ -3,30 +3,33 @@ import {decode} from 'html-entities';
 import Button from '../Base/Button';
 
 export default function QuizQuestions() {
-  const [quizData, setQuizData] = useState({});
+  const [quizData, setQuizData] = useState([]);
+  let apiResults = null;
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
-  // const incorrectAnswers = quizData.results?.map((result) => console.log(result.incorrect_answers));
-  // console.log("incorrectAnswers: ", incorrectAnswers);
 
-  // const correctAnswers = quizData.results?.map((result) => result.correct_answer);
-  // console.log("correctAnswers: ", correctAnswers);
+// declare the function
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
 
   // Fetch the data from the API
   useEffect(() => {
     fetch(url)
       .then(response => response.json())
-      .then(data => setQuizData(data.results))
+      .then(data => {
+        apiResults = data.results
+        apiResults.map((question) => {
+          question.allAnswers = [...question.incorrect_answers, question.correct_answer]
+          question.allAnswers = shuffle(question.allAnswers)
+        })
+        setQuizData(apiResults)
+      })
   }, [])
-  
-    // Function to insert the correct_answer randomly into the incorrect answers array
-  function shuffleAllAnswers(incorrectAnswers, correctAnswers) {
-    // Generate a random index
-    let randomIndex = Math.floor(Math.random() * (incorrectAnswers.length + 1));
-    //Insert the item at the random index
-    incorrectAnswers.splice(randomIndex, 0, correctAnswers)
-  }
-
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -40,7 +43,7 @@ export default function QuizQuestions() {
             <div className="Quizzical__Form-Section" key={decode(quiz.correct_answer)}>
               <p className="Quizzical__Question">{decode(quiz.question)}</p>
               <div className="Quizzical__Answers-Wrapper">
-                {quiz.incorrect_answers?.map((answers, index) =>
+                {quiz.allAnswers?.map((answers, index) =>
                   <div className="Quizzical__Answers" key={index}>
                     <input className="input-radio" value={decode(quiz.correct_answer)} type="radio" name={decode(quiz.correct_answer)} id={decode(answers)} />
                     <label htmlFor={decode(answers)}>{decode(answers)}</label>
