@@ -15,8 +15,8 @@ function App() {
   return (
     <>
       <Quizzical>
-        {isQuizStarting ? <StartQuiz startQuizScreen={handleQuizStart} /> : <QuizQuestions />}
-        {/* <QuizQuestions /> */}
+        {/* {isQuizStarting ? <StartQuiz startQuizScreen={handleQuizStart} /> : <QuizQuestions />} */}
+        <QuizQuestions />
       </Quizzical>
     </>
   )
