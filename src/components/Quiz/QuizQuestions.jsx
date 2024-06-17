@@ -5,6 +5,7 @@ import Button from '../Base/Button';
 
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState(null)
   // let apiResults = null;
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
@@ -29,14 +30,19 @@ export default function QuizQuestions() {
           question.allAnswers = shuffle(question.allAnswers)
           question.sectionId = nanoid()
         })
-        console.log("apiResults : ", apiResults)
+        // console.log("apiResults : ", apiResults)
         setQuizData(apiResults)
       })
   }, [])
 
-  function getCorrectAnswer() {
+  function handleChange(event) {
+    const { value } = event.target
+
+    console.log(value)
 
   }
+
+  // console.log("quizData : ", quizData)
 
 
   function handleSubmit(event) {
@@ -58,8 +64,9 @@ export default function QuizQuestions() {
                       className="input-radio"
                       id={answers}
                       type="radio"
+                      onChange={handleChange}
                       name={quiz.correct_answer}
-                      value={quiz.correct_answer}
+                      value={answers}
                     />
                     <label htmlFor={answers}>{decode(answers)}</label>
                   </div>
