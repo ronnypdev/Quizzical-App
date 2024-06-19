@@ -30,7 +30,7 @@ export default function QuizQuestions() {
           question.allAnswers = shuffle(question.allAnswers)
           question.sectionId = nanoid()
         })
-        // console.log("apiResults : ", apiResults)
+
         setQuizData(apiResults)
       })
   }, [])
