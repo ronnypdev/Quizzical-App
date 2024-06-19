@@ -40,7 +40,7 @@ export default function QuizQuestions() {
     setAnswer(value)
   }
 
-  function handleSubmit(event) {
+  function submitQuizData(event) {
     event.preventDefault();
     console.log("form submitted")
   }
@@ -48,7 +48,7 @@ export default function QuizQuestions() {
   return (
     <>
       <div className="Quizzical__Quiz">
-        <form className="Quizzical__Form" onSubmit={handleSubmit}>
+        <form className="Quizzical__Form" onSubmit={submitQuizData}>
           {quizData?.map((quiz) =>
             <div className="Quizzical__Form-Section" key={quiz.sectionId}>
               <p className="Quizzical__Question">{decode(quiz.question)}</p>
