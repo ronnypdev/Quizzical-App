@@ -9,6 +9,8 @@ export default function QuizQuestions() {
   const [correctAnswer, setCorrectAnswer] = useState("")
   // let apiResults = null;
 
+  console.log("correctAnswer : ", correctAnswer)
+
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
 
   // declare the function
@@ -36,7 +38,8 @@ export default function QuizQuestions() {
             allShuffleAnswers: question.allAnswers
           }
        })
-        
+        console.log("apiResults : ", apiResults)
+        setCorrectAnswer(apiResults.correctAnswer)
         setQuizData(apiResults)
       })
   }, [])
