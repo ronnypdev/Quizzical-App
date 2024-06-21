@@ -6,6 +6,7 @@ import Button from '../Base/Button';
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
   const [answer, setAnswer] = useState(null)
+  const [correctAnswer, setCorrectAnswer] = useState("")
   // let apiResults = null;
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
@@ -24,13 +25,18 @@ export default function QuizQuestions() {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-       const apiResults = data.results
-        apiResults.map((question) => {
+       const apiResults = data.results.map((question) => {
           question.allAnswers = [...question.incorrect_answers, question.correct_answer]
           question.allAnswers = shuffle(question.allAnswers)
-          question.sectionId = nanoid()
-        })
 
+          return {
+            sectionId: nanoid(),
+            correctAnswer: decode(question.correct_answer),
+            quizQuestion: decode(question.question),
+            allShuffleAnswers: question.allAnswers
+          }
+       })
+        
         setQuizData(apiResults)
       })
   }, [])
@@ -51,16 +57,16 @@ export default function QuizQuestions() {
         <form className="Quizzical__Form" onSubmit={submitQuizData}>
           {quizData?.map((quiz) =>
             <div className="Quizzical__Form-Section" key={quiz.sectionId}>
-              <p className="Quizzical__Question">{decode(quiz.question)}</p>
+              <p className="Quizzical__Question">{quiz.quizQuestion}</p>
               <div className="Quizzical__Answers-Wrapper">
-                {quiz.allAnswers?.map((answers, index) =>
+                {quiz.allShuffleAnswers?.map((answers, index) =>
                   <div className="Quizzical__Answers" key={index}>
                     <input
                       className="input-radio"
                       id={answers}
                       type="radio"
                       onChange={handleChange}
-                      name={quiz.correct_answer}
+                      name={quiz.correctAnswer}
                       value={answers}
                     />
                     <label htmlFor={answers}>{decode(answers)}</label>
