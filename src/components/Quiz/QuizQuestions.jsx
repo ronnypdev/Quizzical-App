@@ -45,8 +45,6 @@ export default function QuizQuestions() {
     setAnswer(value)
   }
 
-  
-
   function submitQuizData(event) {
     event.preventDefault();
     console.log("form submitted")
