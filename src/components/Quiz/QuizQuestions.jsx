@@ -6,10 +6,7 @@ import Button from '../Base/Button';
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
   const [answer, setAnswer] = useState(null)
-  const [correctAnswer, setCorrectAnswer] = useState("")
   // let apiResults = null;
-
-  console.log("correctAnswer : ", correctAnswer)
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
 
@@ -39,7 +36,6 @@ export default function QuizQuestions() {
           }
        })
         console.log("apiResults : ", apiResults)
-        setCorrectAnswer(apiResults.correctAnswer)
         setQuizData(apiResults)
       })
   }, [])
@@ -48,6 +44,8 @@ export default function QuizQuestions() {
     const { value } = event.target
     setAnswer(value)
   }
+
+  
 
   function submitQuizData(event) {
     event.preventDefault();
