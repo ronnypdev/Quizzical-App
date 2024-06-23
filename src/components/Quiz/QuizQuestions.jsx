@@ -5,7 +5,7 @@ import Button from '../Base/Button';
 
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
-  const [answer, setAnswer] = useState(null)
+  const [selectedAnswer, setSelectedAnswer] = useState('')
   // let apiResults = null;
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
@@ -35,20 +35,24 @@ export default function QuizQuestions() {
             allShuffleAnswers: question.allAnswers
           }
        })
-        console.log("apiResults : ", apiResults)
         setQuizData(apiResults)
       })
   }, [])
 
   function handleChange(event) {
     const { value } = event.target
-    setAnswer(value)
+    setSelectedAnswer(value)
   }
 
   function submitQuizData(event) {
     event.preventDefault();
     console.log("form submitted")
   }
+
+  function selectAnswer() {
+    const quizAnswers = quizData.map((answer) => console.log(answer.allShuffleAnswers))
+  }
+  selectAnswer();
 
   return (
     <>
