@@ -47,12 +47,12 @@ export default function QuizQuestions() {
   function submitQuizData(event) {
     event.preventDefault();
     console.log("form submitted")
+
+    if (selectedAnswer === quizData.correctAnswer) {
+      console.log("color green")
+    }
   }
 
-  function selectAnswer() {
-    const quizAnswers = quizData.map((answer) => console.log(answer.allShuffleAnswers))
-  }
-  selectAnswer();
 
   return (
     <>
