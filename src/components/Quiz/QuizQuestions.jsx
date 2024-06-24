@@ -46,11 +46,12 @@ export default function QuizQuestions() {
 
   function submitQuizData(event) {
     event.preventDefault();
-    console.log("form submitted")
+    const quizAnswers = quizData.map((answers) => console.log(answers.correctAnswer))
 
-    if (selectedAnswer === quizData.correctAnswer) {
+    if (selectedAnswer === quizAnswers) {
       console.log("color green")
     }
+    console.log("form submitted")
   }
 
 
