@@ -5,7 +5,7 @@ import Button from '../Base/Button';
 
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
-  const [selectedAnswer, setSelectedAnswer] = useState('')
+  const [selectedAnswer, setSelectedAnswer] = useState(false)
   // let apiResults = null;
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
@@ -40,10 +40,8 @@ export default function QuizQuestions() {
   }, [])
 
   function handleChange(event) {
-    const { value, name } = event.target
-    setSelectedAnswer({
-      [name]: value
-    })
+    const { value } = event.target
+    setSelectedAnswer(value)
   }
 
   function submitQuizData(event) {
@@ -55,9 +53,8 @@ export default function QuizQuestions() {
     } else {
       console.log("wrong answer")
     }
-    console.log("form submitted")
-  }
 
+  }
 
   return (
     <>
@@ -76,7 +73,6 @@ export default function QuizQuestions() {
                       onChange={handleChange}
                       name={quiz.correctAnswer}
                       value={answers}
-                      checked={selectedAnswer === answers} 
                     />
                     <label htmlFor={answers}>{decode(answers)}</label>
                   </div>
