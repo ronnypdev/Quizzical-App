@@ -40,16 +40,20 @@ export default function QuizQuestions() {
   }, [])
 
   function handleChange(event) {
-    const { value } = event.target
-    setSelectedAnswer(value)
+    const { value, name } = event.target
+    setSelectedAnswer({
+      [name]: value
+    })
   }
 
   function submitQuizData(event) {
     event.preventDefault();
-    const quizAnswers = quizData.map((answers) => console.log(answers.correctAnswer))
+    const quizAnswers = quizData.map((answers) => answers.correctAnswer)
 
     if (selectedAnswer === quizAnswers) {
       console.log("color green")
+    } else {
+      console.log("wrong answer")
     }
     console.log("form submitted")
   }
@@ -72,6 +76,7 @@ export default function QuizQuestions() {
                       onChange={handleChange}
                       name={quiz.correctAnswer}
                       value={answers}
+                      checked={selectedAnswer === answers} 
                     />
                     <label htmlFor={answers}>{decode(answers)}</label>
                   </div>
