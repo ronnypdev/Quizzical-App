@@ -5,7 +5,13 @@ import Button from '../Base/Button';
 
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
-  const [selectedAnswer, setSelectedAnswer] = useState(false)
+  const [selectedAnswer, setSelectedAnswer] = useState({
+    question1: '',
+    question2: '',
+    question3: '',
+    question4: '',
+    question5: ''
+  })
   // let apiResults = null;
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
@@ -73,6 +79,7 @@ export default function QuizQuestions() {
                       onChange={handleChange}
                       name={quiz.correctAnswer}
                       value={answers}
+                      checked={selectedAnswer === answers}
                     />
                     <label htmlFor={answers}>{decode(answers)}</label>
                   </div>
