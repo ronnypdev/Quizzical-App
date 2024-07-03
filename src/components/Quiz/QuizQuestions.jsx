@@ -6,7 +6,6 @@ import Button from '../Base/Button';
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState('')
-  // let apiResults = null;
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
 
@@ -32,7 +31,8 @@ export default function QuizQuestions() {
             sectionId: nanoid(),
             correctAnswer: decode(question.correct_answer),
             quizQuestion: decode(question.question),
-            allShuffleAnswers: question.allAnswers
+            allShuffleAnswers: question.allAnswers,
+            selectedAnswers: ''
           }
        })
         setQuizData(apiResults)
@@ -44,15 +44,13 @@ export default function QuizQuestions() {
     setSelectedAnswer(value)
   }
 
+  console.log("selectedAnswer : ", selectedAnswer)
+
   function submitQuizData(event) {
     event.preventDefault();
-    const quizAnswers = quizData.map((answers) => answers.correctAnswer)
+    // const quizAnswers = quizData.map((answers) => answers.correctAnswer)/
 
-    if (selectedAnswer === quizAnswers) {
-      console.log("color green")
-    } else {
-      console.log("wrong answer")
-    }
+    console.log("selectedAnswer : ", selectedAnswer);
 
   }
 
@@ -73,7 +71,6 @@ export default function QuizQuestions() {
                       onChange={handleChange}
                       name={quiz.correctAnswer}
                       value={answers}
-                      checked={selectedAnswer === answers}
                     />
                     <label htmlFor={answers}>{decode(answers)}</label>
                   </div>
