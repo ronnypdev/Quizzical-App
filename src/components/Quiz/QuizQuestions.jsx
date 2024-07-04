@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { decode } from 'html-entities';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 import Button from '../Base/Button';
 
 export default function QuizQuestions() {
@@ -51,8 +51,10 @@ export default function QuizQuestions() {
     // const quizAnswers = quizData.map((answers) => answers.correctAnswer)/
 
     console.log("selectedAnswer : ", selectedAnswer);
-
   }
+
+  const generateKey = (item, index) => `${item}-${index}`;
+
 
   return (
     <>
@@ -63,7 +65,7 @@ export default function QuizQuestions() {
               <p className="Quizzical__Question">{quiz.quizQuestion}</p>
               <div className="Quizzical__Answers-Wrapper">
                 {quiz.allShuffleAnswers?.map((answers, index) =>
-                  <div className="Quizzical__Answers" key={index}>
+                  <div className="Quizzical__Answers" key={generateKey(quiz, index)}>
                     <input
                       className="input-radio"
                       id={answers}
