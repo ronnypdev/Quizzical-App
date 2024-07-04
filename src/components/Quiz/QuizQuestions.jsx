@@ -5,11 +5,11 @@ import Button from '../Base/Button';
 
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
-  const [selectedAnswer, setSelectedAnswer] = useState('')
+  // const [selectedAnswer, setSelectedAnswer] = useState('')
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
 
-  // declare the function
+  // function that shuffles an Array
   const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -28,29 +28,40 @@ export default function QuizQuestions() {
           question.allAnswers = shuffle(question.allAnswers)
 
           return {
-            sectionId: nanoid(),
+            id: nanoid(),
             correctAnswer: decode(question.correct_answer),
             quizQuestion: decode(question.question),
             allShuffleAnswers: question.allAnswers,
-            selectedAnswers: ''
+            selectedAnswer: ''
           }
        })
         setQuizData(apiResults)
       })
   }, [])
 
-  function handleChange(event) {
+  function handleChange(event, id) {
     const { value } = event.target
-    setSelectedAnswer(value)
+    setQuizData(prevQuizData => (
+      prevQuizData.map((quiz) => quiz.id === id ? {...quiz, selectedAnswers: value} : quiz)
+    ))
+    // setSelectedAnswer(value)
   }
 
-  console.log("selectedAnswer : ", selectedAnswer)
+  function getUserAnswers() {
+    quizData.map((quiz) => {
+      if (quiz.selectedAnswer === quiz.correctAnswer) {
+        return 'correct-answer'
+      } else if (quiz.selectedAnswer !== quiz.correctAnswer && quiz.selectedAnswer === quiz.allShuffleAnswers) {
+        return 'wrong-answer'
+      } else {
+        return 'disable-answer'
+      }
+    })
+  }
 
   function submitQuizData(event) {
     event.preventDefault();
-    // const quizAnswers = quizData.map((answers) => answers.correctAnswer)/
-
-    console.log("selectedAnswer : ", selectedAnswer);
+    getUserAnswers()
   }
 
   const generateKey = (item, index) => `${item}-${index}`;
@@ -61,7 +72,7 @@ export default function QuizQuestions() {
       <div className="Quizzical__Quiz">
         <form className="Quizzical__Form" onSubmit={submitQuizData}>
           {quizData?.map((quiz) =>
-            <div className="Quizzical__Form-Section" key={quiz.sectionId}>
+            <div className="Quizzical__Form-Section" key={quiz.id}>
               <p className="Quizzical__Question">{quiz.quizQuestion}</p>
               <div className="Quizzical__Answers-Wrapper">
                 {quiz.allShuffleAnswers?.map((answers, index) =>

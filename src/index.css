@@ -195,6 +195,7 @@
   color: var(--color-primary);
   border-color: var(--color-primary);
   opacity: 0.5;
+  cursor: none;
 }
 
 .Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked+label.disable-answer {
@@ -202,6 +203,7 @@
   color: var(--color-primary);
   border-color: var(--color-primary);
   opacity: 0.5;
+  cursor: none;
 }
 
 .Quizzical .Quizzical__Quiz .Quizzical__Button-Group {
