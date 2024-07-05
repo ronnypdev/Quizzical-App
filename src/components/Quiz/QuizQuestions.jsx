@@ -47,6 +47,8 @@ export default function QuizQuestions() {
     // setSelectedAnswer(value)
   }
 
+  console.log("quizData : ", quizData)
+
   function getUserAnswers() {
     quizData.map((quiz) => {
       if (quiz.selectedAnswer === quiz.correctAnswer) {
@@ -79,13 +81,13 @@ export default function QuizQuestions() {
                   <div className="Quizzical__Answers" key={generateKey(quiz, index)}>
                     <input
                       className="input-radio"
-                      id={answers}
+                      id={`${quiz.id}-${index}`}
                       type="radio"
                       onChange={handleChange}
-                      name={quiz.correctAnswer}
+                      name={quiz.id}
                       value={answers}
                     />
-                    <label htmlFor={answers}>{decode(answers)}</label>
+                    <label htmlFor={`${quiz.id}-${index}`}>{decode(answers)}</label>
                   </div>
               )}
               </div>
