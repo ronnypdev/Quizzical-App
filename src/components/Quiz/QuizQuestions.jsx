@@ -5,7 +5,9 @@ import Button from '../Base/Button';
 
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
-  // const [selectedAnswer, setSelectedAnswer] = useState('')
+  const [score, setScore] = useState(0);
+  const [showResults, setShowResutls] = useState(false)
+  // const [userAnswer, setUserAnswer] = useState('')
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
 
@@ -44,7 +46,7 @@ export default function QuizQuestions() {
     setQuizData(prevQuizData => (
       prevQuizData.map((quiz) => quiz.id === id ? {...quiz, selectedAnswers: value} : quiz)
     ))
-    // setSelectedAnswer(value)
+    // setUserAnswer(value)
   }
 
   console.log("quizData : ", quizData)
@@ -68,7 +70,6 @@ export default function QuizQuestions() {
 
   const generateKey = (item, index) => `${item}-${index}`;
 
-
   return (
     <>
       <div className="Quizzical__Quiz">
@@ -86,6 +87,8 @@ export default function QuizQuestions() {
                       onChange={handleChange}
                       name={quiz.id}
                       value={answers}
+                      checked={quiz.selectedAnswer[index] === answers}
+                      disabled={showResults}
                     />
                     <label htmlFor={`${quiz.id}-${index}`}>{decode(answers)}</label>
                   </div>
