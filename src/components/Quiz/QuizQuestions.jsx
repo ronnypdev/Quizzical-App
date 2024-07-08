@@ -7,7 +7,6 @@ export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
   const [score, setScore] = useState(0);
   const [showResults, setShowResutls] = useState(false)
-  // const [userAnswer, setUserAnswer] = useState('')
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
 
@@ -41,31 +40,34 @@ export default function QuizQuestions() {
       })
   }, [])
 
-  function handleChange(event, id) {
-    const { value } = event.target
+  function handleChange(event) {
+    const { value, dataset } = event.target
     setQuizData(prevQuizData => (
-      prevQuizData.map((quiz) => quiz.id === id ? {...quiz, selectedAnswers: value} : quiz)
+      prevQuizData.map((quiz) => quiz.id === dataset.questionId ? {...quiz, selectedAnswer: value} : quiz)
     ))
-    // setUserAnswer(value)
   }
 
-  console.log("quizData : ", quizData)
+  // console.log("quizData : ", quizData)
 
-  function getUserAnswers() {
-    quizData.map((quiz) => {
-      if (quiz.selectedAnswer === quiz.correctAnswer) {
-        return 'correct-answer'
-      } else if (quiz.selectedAnswer !== quiz.correctAnswer && quiz.selectedAnswer === quiz.allShuffleAnswers) {
-        return 'wrong-answer'
-      } else {
-        return 'disable-answer'
-      }
-    })
-  }
+  // function getUserAnswers() {
+  //   quizData.map((quiz) => {
+  //     console.log("allAnswers: ", quiz.allShuffleAnswers)
+  //     if (quiz.selectedAnswer === quiz.correctAnswer) {
+  //       console.log("correct-answer")
+  //       return 'correct-answer'
+  //     } else if (quiz.selectedAnswer !== quiz.correctAnswer && quiz.selectedAnswer === quiz.allShuffleAnswers) {
+  //       console.log("wrong-answer")
+  //       return 'wrong-answer'
+  //     } else {
+  //       console.log("disable-answer")
+  //       return 'disable-answer'
+  //     }
+  //   })
+  // }
 
   function submitQuizData(event) {
     event.preventDefault();
-    getUserAnswers()
+    // getUserAnswers()
   }
 
   const generateKey = (item, index) => `${item}-${index}`;
@@ -83,11 +85,12 @@ export default function QuizQuestions() {
                     <input
                       className="input-radio"
                       id={`${quiz.id}-${index}`}
+                      data-question-id={`${quiz.id}`}
                       type="radio"
                       onChange={handleChange}
                       name={quiz.id}
                       value={answers}
-                      checked={quiz.selectedAnswer[index] === answers}
+                      checked={quiz.selectedAnswer === answers}
                       disabled={showResults}
                     />
                     <label htmlFor={`${quiz.id}-${index}`}>{decode(answers)}</label>

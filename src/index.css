@@ -164,7 +164,7 @@
   border-color: transparent;
 }
 
-.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus+label.correct-answer {
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus + label.correct-answer {
   background-color: var(--color-green-success);
   color: var(--color-primary);
   border-color: transparent;
@@ -176,21 +176,21 @@
   border-color: transparent;
 }
 
-.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus+label.wrong-answer {
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus + label.wrong-answer {
   background-color: var(--color-red-failed);
   color: var(--color-primary);
   border-color: transparent;
   opacity: 0.5;
 }
 
-.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked+label.wrong-answer {
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked + label.wrong-answer {
   background-color: var(--color-red-failed);
   color: var(--color-primary);
   border-color: transparent;
   opacity: 0.5;
 }
 
-.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus+label.disable-answer {
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:focus + label.disable-answer {
   background-color: transparent;
   color: var(--color-primary);
   border-color: var(--color-primary);
@@ -198,7 +198,7 @@
   cursor: none;
 }
 
-.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked+label.disable-answer {
+.Quizzical .Quizzical__Quiz .Quizzical__Answers .input-radio:checked + label.disable-answer {
   background-color: transparent;
   color: var(--color-primary);
   border-color: var(--color-primary);
