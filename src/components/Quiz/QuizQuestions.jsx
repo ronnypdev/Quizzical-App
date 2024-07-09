@@ -40,6 +40,13 @@ export default function QuizQuestions() {
       })
   }, [])
 
+  /**
+   * handleChange function
+   * keep tracks of user answer selection
+   * and passes the user answer value
+   * to the selectedAnswer property
+   * @param {*} event
+   */
   function handleChange(event) {
     const { value, dataset } = event.target
     setQuizData(prevQuizData => (
@@ -47,27 +54,24 @@ export default function QuizQuestions() {
     ))
   }
 
-  // console.log("quizData : ", quizData)
+  function highlightAnswers() {
+    const selectedAnswer = quizData.map((quiz) => console.log(quiz.selectedAnswer))
+    const correctAnswer = quizData.map((quiz) => console.log(quiz.correctAnswer))
+    const answers = quizData.map((quiz) => quiz.allShuffleAnswers.map((answer) => console.log(answer)))
 
-  // function getUserAnswers() {
-  //   quizData.map((quiz) => {
-  //     console.log("allAnswers: ", quiz.allShuffleAnswers)
-  //     if (quiz.selectedAnswer === quiz.correctAnswer) {
-  //       console.log("correct-answer")
-  //       return 'correct-answer'
-  //     } else if (quiz.selectedAnswer !== quiz.correctAnswer && quiz.selectedAnswer === quiz.allShuffleAnswers) {
-  //       console.log("wrong-answer")
-  //       return 'wrong-answer'
-  //     } else {
-  //       console.log("disable-answer")
-  //       return 'disable-answer'
-  //     }
-  //   })
-  // }
+    if (selectedAnswer === correctAnswer) {
+        return "correct-answer"
+    } else if (selectedAnswer !== correctAnswer && selectedAnswer == answers) {
+        return "wrong-answer"
+    } else {
+        return "disable-answer"
+    }
+  }
 
   function submitQuizData(event) {
     event.preventDefault();
-    // getUserAnswers()
+    // highlightAnswers()
+    setShowResutls(prevResults => !prevResults)
   }
 
   const generateKey = (item, index) => `${item}-${index}`;
