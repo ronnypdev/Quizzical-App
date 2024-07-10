@@ -54,24 +54,24 @@ export default function QuizQuestions() {
     ))
   }
 
-  function highlightAnswers() {
-    const selectedAnswer = quizData.map((quiz) => console.log(quiz.selectedAnswer))
-    const correctAnswer = quizData.map((quiz) => console.log(quiz.correctAnswer))
-    const answers = quizData.map((quiz) => quiz.allShuffleAnswers.map((answer) => console.log(answer)))
-
-    if (selectedAnswer === correctAnswer) {
-        return "correct-answer"
-    } else if (selectedAnswer !== correctAnswer && selectedAnswer == answers) {
-        return "wrong-answer"
-    } else {
-        return "disable-answer"
+  function highlightAnswers(selectedAnswer, correctAnswer, answers) {
+    if (showResults) {
+      return selectedAnswer === correctAnswer
+      ? "correct-answer"
+      : answers !== correctAnswer && selectedAnswer === answers
+        ? "wrong-answer"
+        : "disable-answer";
     }
   }
 
+  console.log("quizData : ", quizData)
+
   function submitQuizData(event) {
     event.preventDefault();
-    // highlightAnswers()
-    setShowResutls(prevResults => !prevResults)
+    if (quizData.every(quiz => quiz.selectedAnswer !== "none")) {
+      setShowResutls(prevResults => !prevResults)
+    }
+
   }
 
   const generateKey = (item, index) => `${item}-${index}`;
@@ -97,7 +97,9 @@ export default function QuizQuestions() {
                       checked={quiz.selectedAnswer === answers}
                       disabled={showResults}
                     />
-                    <label htmlFor={`${quiz.id}-${index}`}>{decode(answers)}</label>
+                    <label className={highlightAnswers(quiz.selectedAnswer, quiz.correctAnswer, answers)} htmlFor={`${quiz.id}-${index}`}>
+                      {decode(answers)}
+                    </label>
                   </div>
               )}
               </div>
