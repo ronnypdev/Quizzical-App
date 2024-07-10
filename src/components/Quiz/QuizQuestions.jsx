@@ -56,15 +56,13 @@ export default function QuizQuestions() {
 
   function highlightAnswers(selectedAnswer, correctAnswer, answers) {
     if (showResults) {
-      return selectedAnswer === correctAnswer
+      return answers === correctAnswer
       ? "correct-answer"
       : answers !== correctAnswer && selectedAnswer === answers
         ? "wrong-answer"
         : "disable-answer";
     }
   }
-
-  console.log("quizData : ", quizData)
 
   function submitQuizData(event) {
     event.preventDefault();
