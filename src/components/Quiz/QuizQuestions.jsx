@@ -6,6 +6,7 @@ import Button from '../Base/Button';
 export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
   const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [showResults, setShowResutls] = useState(false)
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
