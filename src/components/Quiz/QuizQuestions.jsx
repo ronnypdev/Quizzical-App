@@ -57,9 +57,9 @@ export default function QuizQuestions() {
 
   function highlightAnswers(selectedAnswer, correctAnswer, answers) {
     if (showResults) {
-      return answers === correctAnswer
+      return selectedAnswer === correctAnswer
       ? "correct-answer"
-      : answers !== correctAnswer && selectedAnswer === answers
+      : selectedAnswer !== correctAnswer && selectedAnswer === answers
         ? "wrong-answer"
         : "disable-answer";
     }
