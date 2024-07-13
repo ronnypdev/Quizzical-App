@@ -38,8 +38,24 @@ export default function QuizQuestions() {
           }
        })
         setQuizData(apiResults)
+        setLoading(false);
       })
+      .catch(error => {
+        console.log("Connection error 🚫 please try again!", error)
+        setLoading(false);
+      });
   }, [])
+
+  function getTotalScore() {
+    let quizScore = 0
+    quizData.map((quiz) => {
+      if (quiz.correctAnswer === quiz.selectedAnswer) {
+        quizScore++
+      }
+    })
+
+    setScore(quizScore)
+  }
 
   /**
    * handleChange function
@@ -58,7 +74,7 @@ export default function QuizQuestions() {
   function highlightAnswers(selectedAnswer, correctAnswer, answers) {
     const answerSelection = selectedAnswer === answers;
     const isCorrect = selectedAnswer === correctAnswer;
-    const classes = {};
+    // const classes = {};
 
     if (showResults) {
       // return selectedAnswer === correctAnswer
@@ -67,49 +83,45 @@ export default function QuizQuestions() {
       //   ? "wrong-answer"
       //   : "disable-answer";
 
-      answers.forEach(answer => {
-        if (answer === correctAnswer) {
-            classes[answer] = "correct-answer";
-        } else if (answer === selectedAnswer) {
-            classes[answer] = "wrong-answer";
-        } else {
-            classes[answer] = "disable-answer";
-        }
-      });
-
-      // if (isCorrect) {
-      //   return "correct-answer"
+      // if (answers === correctAnswer) {
+      //     return "correct-answer";
+      // } else if (answers === selectedAnswer) {
+      //     return "wrong-answer";
       // } else {
-      //   if (answerSelection && !isCorrect) {
-      //     return "wrong-answer"
-      //   } else if (selectedAnswer === '') {
-      //     return "disable-answer"
-      //   } else {
-      //     return ''
-      //   }
+      //     return"disable-answer";
       // }
 
-      // if (answers !== selectedAnswer) return "disable-answer";
-
-      // if (isCorrect) {
-      //   return "correct-answer";
-      // } else if (answerSelection && !isCorrect) {
-      //   return "wrong-answer"
-      // } else {
-      //   return "disable-answer";
-      // }
+      if (isCorrect) {
+        return "correct-answer";
+      } else if (answerSelection && !isCorrect) {
+        return "wrong-answer"
+      } else {
+        return "disable-answer";
+      }
     }
-    return classes;
+    // return classes;
   }
 
   function submitQuizData(event) {
     event.preventDefault();
     if (quizData.every(quiz => quiz.selectedAnswer !== "none")) {
+      getTotalScore()
       setShowResutls(prevResults => !prevResults)
     }
   }
 
+  function resetGame() {
+    getTotalScore(0)
+    setShowResutls(false)
+    setQuizData([])
+
+  }
+
   const generateKey = (item, index) => `${item}-${index}`;
+
+  if (loading) {
+    return <p className="score">Page is Loading... ⌛</p>;
+  }
 
   return (
     <>
@@ -142,7 +154,11 @@ export default function QuizQuestions() {
           )}
           {/* end Quizzical__Form-Section */}
           <div className="Quizzical__Button-Group">
-            <Button buttonText="check answer"/>
+            {showResults && <div className="display-results">
+              <p className="score">You scored {score}/5 correct answers</p>
+              <Button buttonCLick={resetGame} buttonText="Play Again!" />
+            </div>}
+            {!showResults && <Button buttonText="check answer" />}
           </div>
         </form>
       </div>
