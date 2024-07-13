@@ -56,13 +56,50 @@ export default function QuizQuestions() {
   }
 
   function highlightAnswers(selectedAnswer, correctAnswer, answers) {
+    const answerSelection = selectedAnswer === answers;
+    const isCorrect = selectedAnswer === correctAnswer;
+    const classes = {};
+
     if (showResults) {
-      return selectedAnswer === correctAnswer
-      ? "correct-answer"
-      : selectedAnswer !== correctAnswer && selectedAnswer === answers
-        ? "wrong-answer"
-        : "disable-answer";
+      // return selectedAnswer === correctAnswer
+      // ? "correct-answer"
+      // : selectedAnswer !== correctAnswer && selectedAnswer === answers
+      //   ? "wrong-answer"
+      //   : "disable-answer";
+
+      answers.forEach(answer => {
+        if (answer === correctAnswer) {
+            classes[answer] = "correct-answer";
+        } else if (answer === selectedAnswer) {
+            classes[answer] = "wrong-answer";
+        } else {
+            classes[answer] = "disable-answer";
+        }
+      });
+
+      // if (isCorrect) {
+      //   return "correct-answer"
+      // } else {
+      //   if (answerSelection && !isCorrect) {
+      //     return "wrong-answer"
+      //   } else if (selectedAnswer === '') {
+      //     return "disable-answer"
+      //   } else {
+      //     return ''
+      //   }
+      // }
+
+      // if (answers !== selectedAnswer) return "disable-answer";
+
+      // if (isCorrect) {
+      //   return "correct-answer";
+      // } else if (answerSelection && !isCorrect) {
+      //   return "wrong-answer"
+      // } else {
+      //   return "disable-answer";
+      // }
     }
+    return classes;
   }
 
   function submitQuizData(event) {
@@ -70,7 +107,6 @@ export default function QuizQuestions() {
     if (quizData.every(quiz => quiz.selectedAnswer !== "none")) {
       setShowResutls(prevResults => !prevResults)
     }
-
   }
 
   const generateKey = (item, index) => `${item}-${index}`;
