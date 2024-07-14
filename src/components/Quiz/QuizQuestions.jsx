@@ -22,28 +22,36 @@ export default function QuizQuestions() {
 
   // Fetch the data from the API
   useEffect(() => {
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-       const apiResults = data.results.map((question) => {
-          question.allAnswers = [...question.incorrect_answers, question.correct_answer]
-          question.allAnswers = shuffle(question.allAnswers)
+    const controller = new AbortController();
+    const signal = controller.signal;
 
-          return {
-            id: nanoid(),
-            correctAnswer: decode(question.correct_answer),
-            quizQuestion: decode(question.question),
-            allShuffleAnswers: question.allAnswers,
-            selectedAnswer: ''
-          }
-       })
-        setQuizData(apiResults)
-        setLoading(false);
+
+    fetch(url, { signal })
+    .then(response => response.json())
+    .then(data => {
+      const apiResults = data.results.map((question) => {
+        question.allAnswers = [...question.incorrect_answers, question.correct_answer]
+        question.allAnswers = shuffle(question.allAnswers)
+
+        return {
+          id: nanoid(),
+          correctAnswer: decode(question.correct_answer),
+          quizQuestion: decode(question.question),
+          allShuffleAnswers: question.allAnswers,
+          selectedAnswer: ''
+        }
       })
-      .catch(error => {
-        console.log("Connection error 🚫 please try again!", error)
-        setLoading(false);
-      });
+      setQuizData(apiResults)
+      setLoading(false);
+    })
+    .catch(error => {
+      console.log("Connection error 🚫 please try again!", error)
+      setLoading(false);
+    });
+
+    return () => {
+      controller.abort(); // Cleanup on component unmount or re-render
+    };
   }, [])
 
   function getTotalScore() {
@@ -53,7 +61,6 @@ export default function QuizQuestions() {
         quizScore++
       }
     })
-
     setScore(quizScore)
   }
 
@@ -114,7 +121,7 @@ export default function QuizQuestions() {
     getTotalScore(0)
     setShowResutls(false)
     setQuizData([])
-
+    fetchQuizData()
   }
 
   const generateKey = (item, index) => `${item}-${index}`;
