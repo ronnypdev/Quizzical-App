@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { decode } from 'html-entities';
 import { nanoid } from 'nanoid';
 import Button from '../Base/Button';
@@ -8,7 +8,6 @@ export default function QuizQuestions() {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [showResults, setShowResutls] = useState(false);
-  // const abortControllerRef = useRef(null);
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
 
@@ -22,17 +21,7 @@ export default function QuizQuestions() {
   };
 
   function fetchQuizData() {
-    // Abort the previous request if it exists
-    // if (abortControllerRef.current) {
-    //   abortControllerRef.current.abort();
-    // }
-
-    // const controller = new AbortController();
-    // abortControllerRef.current = controller;
-    // const signal = controller.signal;
-
     setLoading(true);
-
 
     fetch(url)
     .then(response => {
@@ -95,7 +84,7 @@ export default function QuizQuestions() {
   function highlightAnswers(selectedAnswer, correctAnswer, answers) {
     const answerSelection = selectedAnswer === answers;
     const isCorrect = selectedAnswer === correctAnswer;
-    // const classes = {};
+    const allSelectedAnswered = Object.values(selectedAnswer).every(answer => answer !== '');
 
     if (showResults) {
       // return selectedAnswer === correctAnswer
@@ -104,27 +93,26 @@ export default function QuizQuestions() {
       //   ? "wrong-answer"
       //   : "disable-answer";
 
-      // if (answers === correctAnswer) {
-      //     return "correct-answer";
-      // } else if (answers === selectedAnswer) {
-      //     return "wrong-answer";
-      // } else {
-      //     return"disable-answer";
-      // }
-
       if (isCorrect) {
         return "correct-answer";
       } else if (answerSelection && !isCorrect) {
         return "wrong-answer"
-      } else {
+      } else if (allSelectedAnswered){
         return "disable-answer";
+      } else {
+        return ''
       }
     }
-    // return classes;
+
   }
 
   function submitQuizData(event) {
     event.preventDefault();
+    const quizSelectedAnswers = quizData.map((quiz) => quiz.selectedAnswer)
+    const completedAnswers = Object.values(quizSelectedAnswers).every(answer => answer !== '')
+
+    if (!completedAnswers) return
+
     if (quizData.every(quiz => quiz.selectedAnswer !== "none")) {
       getTotalScore()
       setShowResutls(prevResults => !prevResults)
