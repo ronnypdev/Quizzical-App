@@ -84,23 +84,14 @@ export default function QuizQuestions() {
   function highlightAnswers(selectedAnswer, correctAnswer, answers) {
     const answerSelection = selectedAnswer === answers;
     const isCorrect = selectedAnswer === correctAnswer;
-    const allSelectedAnswered = Object.values(selectedAnswer).every(answer => answer !== '');
 
     if (showResults) {
-      // return selectedAnswer === correctAnswer
-      // ? "correct-answer"
-      // : selectedAnswer !== correctAnswer && selectedAnswer === answers
-      //   ? "wrong-answer"
-      //   : "disable-answer";
-
       if (isCorrect) {
         return "correct-answer";
       } else if (answerSelection && !isCorrect) {
         return "wrong-answer"
-      } else if (allSelectedAnswered){
-        return "disable-answer";
       } else {
-        return ''
+        return "disable-answer";
       }
     }
 
