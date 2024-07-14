@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { decode } from 'html-entities';
 import { nanoid } from 'nanoid';
 import Button from '../Base/Button';
@@ -7,7 +7,8 @@ export default function QuizQuestions() {
   const [quizData, setQuizData] = useState([]);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [showResults, setShowResutls] = useState(false)
+  const [showResults, setShowResutls] = useState(false);
+  // const abortControllerRef = useRef(null);
 
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
 
@@ -20,14 +21,26 @@ export default function QuizQuestions() {
     return array;
   };
 
-  // Fetch the data from the API
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
+  function fetchQuizData() {
+    // Abort the previous request if it exists
+    // if (abortControllerRef.current) {
+    //   abortControllerRef.current.abort();
+    // }
+
+    // const controller = new AbortController();
+    // abortControllerRef.current = controller;
+    // const signal = controller.signal;
+
+    setLoading(true);
 
 
-    fetch(url, { signal })
-    .then(response => response.json())
+    fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(data => {
       const apiResults = data.results.map((question) => {
         question.allAnswers = [...question.incorrect_answers, question.correct_answer]
@@ -48,10 +61,11 @@ export default function QuizQuestions() {
       console.log("Connection error 🚫 please try again!", error)
       setLoading(false);
     });
+  }
 
-    return () => {
-      controller.abort(); // Cleanup on component unmount or re-render
-    };
+  // Fetch the data from the API
+  useEffect(() => {
+    fetchQuizData()
   }, [])
 
   function getTotalScore() {
