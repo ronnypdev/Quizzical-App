@@ -8,10 +8,12 @@ export default function QuizQuestions() {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [showResults, setShowResutls] = useState(false);
-
   const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple";
-
-  // function that shuffles an Array
+  /**
+   * shuffle function
+   * @param {*} array
+   * @returns as shuffle Array
+   */
   const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -19,10 +21,14 @@ export default function QuizQuestions() {
     }
     return array;
   };
-
+  /**
+   * fetchQuizData function
+   * @gets  all the data from
+   * the api and
+   * it @returns it in form of an object
+   */
   function fetchQuizData() {
     setLoading(true);
-
     fetch(url)
     .then(response => {
       if (!response.ok) {
@@ -51,12 +57,17 @@ export default function QuizQuestions() {
       setLoading(false);
     });
   }
-
-  // Fetch the data from the API
+  /**
+   * this useEffect()
+   * executes the fetchQuizData()
+   * one time on every render
+   */
   useEffect(() => {
     fetchQuizData()
   }, [])
-
+  /** getTotalScore function
+   * @gets the quiz total score
+   */
   function getTotalScore() {
     let quizScore = 0
     quizData.map((quiz) => {
@@ -66,7 +77,6 @@ export default function QuizQuestions() {
     })
     setScore(quizScore)
   }
-
   /**
    * handleChange function
    * keep tracks of user answer selection
@@ -80,7 +90,13 @@ export default function QuizQuestions() {
       prevQuizData.map((quiz) => quiz.id === dataset.questionId ? {...quiz, selectedAnswer: value} : quiz)
     ))
   }
-
+  /**
+   * highlightAnswers function
+   * @param {*} selectedAnswer
+   * @param {*} correctAnswer
+   * @param {*} answers
+   * @returns the highlightAnswers
+   */
   function highlightAnswers(selectedAnswer, correctAnswer, answers) {
     const answerSelection = selectedAnswer === answers;
     const isCorrect = selectedAnswer === correctAnswer;
@@ -94,9 +110,12 @@ export default function QuizQuestions() {
         return "disable-answer";
       }
     }
-
   }
-
+  /**
+   * submitQuizData
+   * @param {*} event
+   * @returns all the information submitted to the API
+   */
   function submitQuizData(event) {
     event.preventDefault();
     const quizSelectedAnswers = quizData.map((quiz) => quiz.selectedAnswer)
@@ -109,7 +128,11 @@ export default function QuizQuestions() {
       setShowResutls(prevResults => !prevResults)
     }
   }
-
+  /**
+   * resetGame function
+   * resets the quiz once
+   * all the answers have been submitted
+   */
   function resetGame() {
     getTotalScore(0)
     setShowResutls(false)
